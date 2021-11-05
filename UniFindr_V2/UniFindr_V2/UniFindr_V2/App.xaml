@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UniFindr_V2.App">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Colours -->
+            <Color x:Key="Primary">Black</Color>
+            <Color x:Key="Secondary">#252525</Color>
+            <Color x:Key="Selected">#101010</Color>
+            <Color x:Key="DisabledColour">#909090</Color>
+            <Color x:Key="PrimaryText">#FFD700</Color>
+            <!-- Flyout Menu -->
+            <Style x:Key="FlyoutGrid" TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                <Setter Property="HeightRequest" Value="56"/>
+            </Style>
+            <Style x:Key="FlyoutGridText" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
+                <Setter Property="FontSize" Value="{OnPlatform Default=30, Android=20}"/>
+                <Setter Property="VerticalTextAlignment" Value="Start"/>
+            </Style>
+            <!-- Page Styling -->
+            <Style ApplyToDerivedTypes="True" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
+                <Setter Property="Padding" Value="10"/>
+            </Style>
+            <Style ApplyToDerivedTypes="True" TargetType="CollectionView">
+                <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
+            </Style>
+            <Style x:Key="ListLayout" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="#252525"/>
+                <Setter Property="WidthRequest" Value="500"/>
+                
+            </Style>
+            <!-- Text -->
+            <Style ApplyToDerivedTypes="True" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+            <Style x:Key="Title" TargetType="Label">
+                <Setter Property="FontSize" Value="40"/>
+                <Setter Property="VerticalTextAlignment" Value="Start"/>
+            </Style>
+            <Style x:Key="Subtitle" TargetType="Label">
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="VerticalTextAlignment" Value="Start"/>
+            </Style>
+            <Style x:Key="ListText_Single" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            <!-- Interactive Elements -->
+            <Style ApplyToDerivedTypes="True" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#000000"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
+                <Setter Property="BorderWidth" Value="{OnPlatform Default=5, Android=2}"/>
+                <Setter Property="BorderColor" Value="{StaticResource PrimaryText}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+            <Style ApplyToDerivedTypes="True" TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
+                <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
+            </Style>
+            <!-- Contentview -->
+        </ResourceDictionary>        
+    </Application.Resources>
+</Application>

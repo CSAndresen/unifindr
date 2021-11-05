@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:UniFindr_V2.Views"
+       Title="UniFindr_V2"
+       x:Class="UniFindr_V2.AppShell"
+       FlyoutBackgroundColor="{StaticResource Secondary}">
+
+    <!--
+        The overall app visual hierarchy is defined here, along with navigation.
+    
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+    -->
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource Secondary}" />
+                <Setter Property="Shell.TitleColor" Value="{StaticResource PrimaryText}" />
+                <Setter Property="Shell.DisabledColor" Value="{StaticResource DisabledColour}"/>
+                <Setter Property="Shell.UnselectedColor" Value="{StaticResource Secondary}" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource Primary}"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource Secondary}"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource PrimaryText}"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}"/>
+
+            <!--
+            Default Styles for all Flyout Items
+            https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
+            -->
+            <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#FFD700"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+            <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource PrimaryText}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Selected}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <!--
+            Custom Style you can apply to any Flyout Item
+            -->
+            <Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource PrimaryText}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+    
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid Style="{DynamicResource FlyoutGrid}"  >
+                <Label Text="UniFindr" 
+                       TextColor="{StaticResource PrimaryText}" 
+                       Style="{DynamicResource FlyoutGridText}"
+                       FontSize="30"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    
+    <TabBar>
+        <ShellContent Route="Startup" ContentTemplate="{DataTemplate local:StartupPage}"/>
+    </TabBar>
+    <FlyoutItem Title="Main Menu" Style="{DynamicResource BaseStyle}">
+        <ShellContent Route="MainMenu" ContentTemplate="{DataTemplate local:MainMenuPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Profile" Style="{DynamicResource BaseStyle}">
+        <ShellContent Route="Proile" ContentTemplate="{DataTemplate local:ProfilePage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Search" Style="{DynamicResource BaseStyle}">
+        <ShellContent Route="SearchOptions" ContentTemplate="{DataTemplate local:SearchOptionsPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Country Selection" FlyoutItemIsVisible="False">
+        <ShellContent Route="CountrySelection" ContentTemplate="{DataTemplate local:CountrySelectionPage}"/>
+    </FlyoutItem>
+</Shell>

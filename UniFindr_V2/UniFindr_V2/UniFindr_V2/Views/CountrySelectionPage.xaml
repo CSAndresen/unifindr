@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UniFindr_V2.Views.CountrySelectionPage"
+             xmlns:vm="clr-namespace:UniFindr_V2.ViewModels"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:UniFindr_V2.ViewModels"  
+             xmlns:model="clr-namespace:UniFindr_V2.Models"  
+             x:Name="CountrySelection">
+
+    <ContentPage.BindingContext>
+        <vm:CountrySelectionViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <RefreshView x:DataType="local:CountrySelectionViewModel" Command="{Binding GetCountries}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView x:Name="CountryListView"
+                ItemsSource="{Binding Countries}"
+                SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout x:DataType="model:Country" 
+                                     Style="{DynamicResource ListLayout}">
+                            <Label Text="{Binding CountryName}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListText_Single}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:CountrySelectionViewModel}}, Path=CountryTapped}"		
+                                CommandParameter="{Binding .}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </ContentPage.Content>
+</ContentPage>
