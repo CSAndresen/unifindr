@@ -11,9 +11,11 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Currently preferred country:"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="PreferredCountry"
+                   Style="{DynamicResource Subtitle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

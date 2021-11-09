@@ -1,38 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UniFindr_V2.Views.CountrySelectionPage"
-             xmlns:vm="clr-namespace:UniFindr_V2.ViewModels"
+             x:Class="UniFindr_V2.Views.SearchResultsPage_Home"
+             xmlns:vm="clr-namespace:UniFindr_V2.ViewModels" 
+             xmlns:model="clr-namespace:UniFindr_V2.Models"
              Title="{Binding Title}"
-             xmlns:local="clr-namespace:UniFindr_V2.ViewModels"  
-             xmlns:model="clr-namespace:UniFindr_V2.Models"  
-             x:Name="CountrySelection">
+             x:Name="SearchResults_Home">
 
     <ContentPage.BindingContext>
-        <vm:CountrySelectionViewModel/>
+        <vm:SearchResultsViewModel_Home/>
     </ContentPage.BindingContext>
     
     <ContentPage.Content>
-        <RefreshView x:DataType="local:CountrySelectionViewModel" Command="{Binding GetCountries}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-            <CollectionView x:Name="CountryListView"
-                ItemsSource="{Binding Countries}"
+        <RefreshView x:DataType="vm:SearchResultsViewModel_Home" Command="{Binding GetUniversities}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView x:Name="UniversityListView"
+                ItemsSource="{Binding Universities}"
                 SelectionMode="Single">
                 <CollectionView.Header>
-                    <Label Text="Please select your preferred country"
+                    <StackLayout>
+                        <Label Text="University Name"
                            VerticalOptions="Start"
                            Style="{DynamicResource Subtitle}"/>
+                    </StackLayout>
                 </CollectionView.Header>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout x:DataType="model:Country" 
+                        <StackLayout x:DataType="model:University" 
                                      Style="{DynamicResource ListLayout}">
-                            <Label Text="{Binding CountryName}" 
-                            LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListText_Single}"/>
+                            <Label Text="{Binding UniversityName}"
+                                   LineBreakMode="NoWrap" 
+                                   Style="{DynamicResource ListText_Single}"/>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:CountrySelectionViewModel}}, Path=CountryTapped}"		
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SearchResultsViewModel_Home}}, Path=UniversityTapped}"		
                                 CommandParameter="{Binding .}">
                                 </TapGestureRecognizer>
                             </StackLayout.GestureRecognizers>

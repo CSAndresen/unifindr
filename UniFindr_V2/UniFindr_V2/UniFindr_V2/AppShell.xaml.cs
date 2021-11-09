@@ -6,17 +6,15 @@ using Xamarin.Forms;
 
 namespace UniFindr_V2
 {
-    public partial class AppShell : Xamarin.Forms.Shell
+    public partial class AppShell : Shell
     {
         public AppShell()
         {
             InitializeComponent();
             Routing.RegisterRoute("//Profile", typeof(ProfilePage));
+            Routing.RegisterRoute("//SearchResults_Abroad", typeof(SearchResultsPage_Abroad));
+            Routing.RegisterRoute("//SearchResults_All", typeof(SearchResultsPage_All));
+            Routing.RegisterRoute("//SearchResults_Home", typeof(SearchResultsPage_Home));
         }
-
-        /* private async void OnMenuItemClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//LoginPage");
-        }*/
     }
 }

@@ -5,48 +5,120 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UniFindr_V2.Models;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace UniFindr_V2.Services
 {
     public class Repository : IRepository<University>
     {
-        readonly List<University> favourites;
+        public List<University> FullUniversityList;
+        public List<University> universities_abroad;
+        public List<University> universities_all;
+        public List<University> universities_home;
+
+        public Repository()
+        {
+            FullUniversityList = SendFullApiRequest();
+            universities_abroad = FillUniversitiesList_Abroad();
+            universities_all = FillUniversitiesList_All();
+            universities_home = FillUniversitiesList_Home();
+        }
+
+        public List<University> SendFullApiRequest()
+        {
+            var client = new RestClient("http://universities.hipolabs.com/search?")
+            {
+                Timeout = -1
+            };
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            List<ApiResponse> responseContent = JsonConvert.DeserializeObject<List<ApiResponse>>(response.Content);
+            FullUniversityList = new List<University>();
+            FullUniversityList.Clear();
+            for (int i = 0; i < responseContent.Count; i++)
+            {
+                FullUniversityList.Add(new University
+                {
+                    UniversityName = responseContent[i].name,
+                    UniversityCountry = responseContent[i].country,
+                    UniversityWebsite = responseContent[i].web_pages[0]
+                });
+            }
+            return FullUniversityList;
+        }
+
         public async Task<bool> AddFavourite(University university)
         {
-            if(!favourites.Any(f => f.UniversityName == university.UniversityName))
+            if (!App.applicationData.FavouritedUniversities.Any(f => f.UniversityName == university.UniversityName))
             {
-                favourites.Add(university);
+                App.applicationData.FavouritedUniversities.Add(university);
                 return await Task.FromResult(true);
             }
             return await Task.FromResult(false);
         }
-
-        public async Task<IEnumerable<University>> GetFavourites()
+        public List<University> FillUniversitiesList_Abroad()
         {
-            throw new NotImplementedException();
+            universities_abroad = new List<University>();
+            universities_abroad.Clear();
+            for(int i = 0; i < FullUniversityList.Count; i++)
+            {
+                if(!universities_abroad.Any(u => u.UniversityCountry == App.applicationData.PreferredCountry))
+                {
+                    universities_abroad.Add(FullUniversityList[i]);
+                }
+            }
+            return universities_abroad;
         }
 
-        public async Task<IEnumerable<University>> GetUniversities_Abroad()
+        public async Task<IEnumerable<University>> GetUniversities_Abroad(bool forceRefresh = true)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(universities_abroad);
         }
 
-        public async Task<IEnumerable<University>> GetUniversities_All()
+
+        public List<University> FillUniversitiesList_All()
         {
-            throw new NotImplementedException();
+            universities_all = new List<University>();
+            universities_all.Clear();
+            for (int i = 0; i < FullUniversityList.Count; i++)
+            {
+                universities_all.Add(FullUniversityList[i]);
+            }
+            return universities_all;
         }
 
-        public async Task<IEnumerable<University>> GetUniversities_Home()
+        public async Task<IEnumerable<University>> GetUniversities_All(bool forceRefresh = true)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(universities_all);
+        }
+
+        public List<University> FillUniversitiesList_Home()
+        {
+            universities_home = new List<University>();
+            universities_home.Clear();
+            for (int i = 0; i < FullUniversityList.Count; i++)
+            {
+                if(FullUniversityList[i].UniversityCountry == App.applicationData.PreferredCountry)
+                {
+                    universities_home.Add(FullUniversityList[i]);
+                }
+            }
+            return universities_home;
+        }
+
+        public async Task<IEnumerable<University>> GetUniversities_Home(bool forceRefresh = true)
+        {
+            return await Task.FromResult(universities_home);
         }
 
         public async Task<bool> RemoveFavourite(University university)
         {
-            var universityToRemove = favourites.Where(f => f.UniversityName == university.UniversityName).FirstOrDefault();
-            if(universityToRemove != null)
+            var universityToRemove = App.applicationData.FavouritedUniversities.Where(f => f.UniversityName == university.UniversityName).FirstOrDefault();
+            if (universityToRemove != null)
             {
-                favourites.Add(university);
+                App.applicationData.FavouritedUniversities.Add(university);
                 return await Task.FromResult(true);
             }
             return await Task.FromResult(false);

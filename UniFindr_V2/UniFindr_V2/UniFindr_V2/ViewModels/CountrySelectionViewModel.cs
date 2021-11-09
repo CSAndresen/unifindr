@@ -1,15 +1,8 @@
-﻿using Newtonsoft.Json;
-using RestSharp;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UniFindr_V2.Models;
-using UniFindr_V2.Services;
-using UniFindr_V2.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -55,13 +48,7 @@ namespace UniFindr_V2.ViewModels
         public void OnAppearing()
         {
             IsBusy = true;
-            if(Preferences.Get("Country", null) == null)
-            {
-                SelectedCountry = null;
-            } else
-            {
-                selectedCountry.CountryName = Preferences.Get("Country", null);
-            }
+            SelectedCountry = null;
         }
 
         public Country SelectedCountry
@@ -70,10 +57,6 @@ namespace UniFindr_V2.ViewModels
             set
             {
                 SetProperty(ref selectedCountry, value);
-                if(value != null)
-                {
-                    Preferences.Set("Country", value.CountryName);
-                }
                 OnCountrySelected(value);
             }
         }
@@ -84,7 +67,8 @@ namespace UniFindr_V2.ViewModels
             {
                 return;
             }
-            await Shell.Current.GoToAsync("//Profile");
+            App.applicationData.PreferredCountry = country.CountryName;
+            await Shell.Current.GoToAsync("//MainMenu");
         }
     }
 }

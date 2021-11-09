@@ -1,23 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="UniFindr_V2.Views.SearchOptionsPage"
+             x:Class="UniFindr_V2.Views.SearchResultsPage_All"
              xmlns:vm="clr-namespace:UniFindr_V2.ViewModels"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
-        <vm:SearchOptionsViewModel/>
+        <vm:SearchResultsViewModel_All/>
     </ContentPage.BindingContext>
-
+    
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Where would you like to study?"/>
-            <Button Text="Home"
-                    Clicked="SearchHome"/>
-            <Button Text="Abroad"
-                    Clicked="SearchAbroad"/>
-            <Button Text="Anywhere"
-                    Clicked="SearchAnywhere"/>
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />

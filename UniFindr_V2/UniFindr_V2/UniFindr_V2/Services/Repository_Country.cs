@@ -18,8 +18,10 @@ namespace UniFindr_V2.Services
 
         public List<Country> FillCountriesList()
         {
-            var client = new RestClient("http://universities.hipolabs.com/search");
-            client.Timeout = -1;
+            var client = new RestClient("http://universities.hipolabs.com/search")
+            {
+                Timeout = -1
+            };
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
             List<ApiResponse> responseContent = JsonConvert.DeserializeObject<List<ApiResponse>>(response.Content);

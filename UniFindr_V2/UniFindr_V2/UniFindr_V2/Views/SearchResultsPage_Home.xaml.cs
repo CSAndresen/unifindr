@@ -10,14 +10,13 @@ using Xamarin.Forms.Xaml;
 namespace UniFindr_V2.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CountrySelectionPage : ContentPage
+    public partial class SearchResultsPage_Home : ContentPage
     {
-        readonly CountrySelectionViewModel _viewModel;
-
-        public CountrySelectionPage()
+        readonly SearchResultsViewModel_Home _viewModel;
+        public SearchResultsPage_Home()
         {
             InitializeComponent();
-            BindingContext = _viewModel = new CountrySelectionViewModel();
+            BindingContext = _viewModel = new SearchResultsViewModel_Home();
         }
 
         protected override void OnAppearing()
