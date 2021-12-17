@@ -12,10 +12,13 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Currently preferred country:"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand" 
+                   Style="{DynamicResource Title}"/>
             <Label x:Name="PreferredCountry"
                    Style="{DynamicResource Subtitle}"/>
+            <Button Text="Go To Profile"
+                    x:Name="ProfileShortcut"
+                    Clicked="GoToProfilePage"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

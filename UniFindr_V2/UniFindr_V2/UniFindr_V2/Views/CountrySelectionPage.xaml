@@ -28,7 +28,7 @@
                                      Style="{DynamicResource ListLayout}">
                             <Label Text="{Binding CountryName}" 
                             LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListText_Single}"/>
+                            Style="{DynamicResource ListText}"/>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"

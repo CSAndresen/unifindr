@@ -23,7 +23,7 @@ namespace UniFindr_V2.Views
 
         private async void FavouritesNavigation()
         {
-            await Shell.Current.GoToAsync("//CountrySelection");
+            await Shell.Current.GoToAsync("//Favourites");
         }
 
         private void GoToCountrySelection(object sender, EventArgs e)

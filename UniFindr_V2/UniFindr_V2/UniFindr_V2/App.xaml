@@ -41,34 +41,34 @@
                 <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
                 <Setter Property="VerticalTextAlignment" Value="Center"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontSize" Value="{OnPlatform Default=20, Android=15}"/>
             </Style>
             <Style x:Key="Title" TargetType="Label">
-                <Setter Property="FontSize" Value="40"/>
+                <Setter Property="FontSize" Value="{OnPlatform Default=40, Android=30}"/>
                 <Setter Property="VerticalTextAlignment" Value="Start"/>
             </Style>
             <Style x:Key="Subtitle" TargetType="Label">
-                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="FontSize" Value="{OnPlatform Default=30, Android=20}"/>
                 <Setter Property="VerticalTextAlignment" Value="Start"/>
             </Style>
-            <Style x:Key="ListText_Single" TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
-                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Style x:Key="ListText" TargetType="Label">
+                <Setter Property="FontSize" Value="{OnPlatform Default=20, Android=15}"/>
             </Style>
             <!-- Interactive Elements -->
             <Style ApplyToDerivedTypes="True" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="#000000"/>
-                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontSize" Value="{OnPlatform Default=20, Android=15}"/>
                 <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
                 <Setter Property="BorderWidth" Value="{OnPlatform Default=5, Android=2}"/>
                 <Setter Property="BorderColor" Value="{StaticResource PrimaryText}"/>
                 <Setter Property="CornerRadius" Value="10"/>
                 <Setter Property="Margin" Value="10"/>
+                <Setter Property="WidthRequest" Value="{OnPlatform Default=500, Android=250}"/>
             </Style>
             <Style ApplyToDerivedTypes="True" TargetType="Entry">
                 <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"/>
                 <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
-                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontSize" Value="{OnPlatform Default=20, Android=16}"/>
                 <Setter Property="TextColor" Value="{StaticResource PrimaryText}"/>
             </Style>
             <!-- Contentview -->

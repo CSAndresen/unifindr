@@ -10,5 +10,10 @@ namespace UniFindr_V2.ViewModels
         {
             Title = "Profile";
         }
+
+        public void OnAppearing()
+        {
+            IsBusy = true;
+        }
     }
 }

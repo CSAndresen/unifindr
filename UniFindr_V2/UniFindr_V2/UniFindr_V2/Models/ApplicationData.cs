@@ -7,4 +7,6 @@ public class ApplicationData
 {
     public string PreferredCountry { get; set; }
     public List<University> FavouritedUniversities { get; set; }
+
+    public University LastSelectedUniversity { get; set; }
 }

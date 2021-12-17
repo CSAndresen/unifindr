@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UniFindr_V2.Views.SearchResultsPage_Abroad"
-             xmlns:vm="clr-namespace:UniFindr_V2.ViewModels"
+             xmlns:vm="clr-namespace:UniFindr_V2.ViewModels" 
+             xmlns:model="clr-namespace:UniFindr_V2.Models"
              Title="{Binding Title}">
 
     <ContentPage.BindingContext>
@@ -10,10 +11,38 @@
     </ContentPage.BindingContext>
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <RefreshView x:DataType="vm:SearchResultsViewModel_Abroad" Command="{Binding GetUniversities}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView x:Name="UniversityListView"
+                ItemsSource="{Binding Universities}"
+                SelectionMode="Single">
+                <CollectionView.Header>
+                    <StackLayout>
+                        <Label Text="University Name"
+                           VerticalOptions="Start"
+                           Style="{DynamicResource Subtitle}"/>
+                    </StackLayout>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout x:DataType="model:University" 
+                                     Style="{DynamicResource ListLayout}">
+                            <Label Text="{Binding UniversityCountry}"
+                                   LineBreakMode="NoWrap" 
+                                   Style="{DynamicResource ListText}"/>
+                            <Label Text="{Binding UniversityName}"
+                                   LineBreakMode="NoWrap" 
+                                   Style="{DynamicResource ListText}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SearchResultsViewModel_Abroad}}, Path=UniversityTapped}"		
+                                CommandParameter="{Binding .}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </ContentPage.Content>
 </ContentPage>

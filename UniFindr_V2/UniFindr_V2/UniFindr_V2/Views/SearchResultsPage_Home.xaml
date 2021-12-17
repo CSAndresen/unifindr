@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:UniFindr_V2.ViewModels" 
              xmlns:model="clr-namespace:UniFindr_V2.Models"
              Title="{Binding Title}"
+             xmlns:local="clr-namespace:UniFindr_V2.ViewModels"
              x:Name="SearchResults_Home">
 
     <ContentPage.BindingContext>
@@ -29,7 +30,7 @@
                                      Style="{DynamicResource ListLayout}">
                             <Label Text="{Binding UniversityName}"
                                    LineBreakMode="NoWrap" 
-                                   Style="{DynamicResource ListText_Single}"/>
+                                   Style="{DynamicResource ListText}"/>
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"

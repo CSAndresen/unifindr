@@ -17,7 +17,7 @@ namespace UniFindr_V2
 
         public App()
         {
-            InitializeComponent();
+            InitializeComponent();            
             DependencyService.Register<Repository>();
             DependencyService.Register<Repository_Country>();
             MainPage = new AppShell();
@@ -40,7 +40,7 @@ namespace UniFindr_V2
         { 
             if(applicationData.FavouritedUniversities != null)
             {
-                Current.Properties["Country"] = applicationData.PreferredCountry.ToString();
+                Current.Properties["Country"] = applicationData.PreferredCountry;
                 Current.Properties["Favourites"] = JsonConvert.SerializeObject(applicationData.FavouritedUniversities);
                 Current.SavePropertiesAsync();
             }

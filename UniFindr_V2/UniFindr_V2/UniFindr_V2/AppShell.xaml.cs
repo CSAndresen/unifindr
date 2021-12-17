@@ -12,9 +12,12 @@ namespace UniFindr_V2
         {
             InitializeComponent();
             Routing.RegisterRoute("//Profile", typeof(ProfilePage));
+            Routing.RegisterRoute("//Favourites", typeof(FavouritesPage));
+            Routing.RegisterRoute("//MainMenu", typeof(MainMenuPage));
             Routing.RegisterRoute("//SearchResults_Abroad", typeof(SearchResultsPage_Abroad));
             Routing.RegisterRoute("//SearchResults_All", typeof(SearchResultsPage_All));
             Routing.RegisterRoute("//SearchResults_Home", typeof(SearchResultsPage_Home));
+            Routing.RegisterRoute(nameof(UniversityDetailsPage), typeof(UniversityDetailsPage));
         }
     }
 }

@@ -13,6 +13,7 @@ namespace UniFindr_V2.Views
     public partial class SearchResultsPage_Home : ContentPage
     {
         readonly SearchResultsViewModel_Home _viewModel;
+
         public SearchResultsPage_Home()
         {
             InitializeComponent();

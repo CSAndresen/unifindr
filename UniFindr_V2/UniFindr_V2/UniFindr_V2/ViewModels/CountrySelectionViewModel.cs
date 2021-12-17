@@ -10,7 +10,7 @@ namespace UniFindr_V2.ViewModels
 {
     public class CountrySelectionViewModel : BaseViewModel
     {
-        private Country selectedCountry;
+        public Country selectedCountry;
         public ObservableCollection<Country> Countries { get; }
         public Command GetCountries { get; }
         public Command<Country> CountryTapped { get; }
@@ -68,6 +68,7 @@ namespace UniFindr_V2.ViewModels
                 return;
             }
             App.applicationData.PreferredCountry = country.CountryName;
+            await Repository_University.RefreshApiCall();
             await Shell.Current.GoToAsync("//MainMenu");
         }
     }

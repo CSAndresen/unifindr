@@ -2,21 +2,26 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using UniFindr_V2.Models;
+using UniFindr_V2.Views;
 using Xamarin.Forms;
 
 namespace UniFindr_V2.ViewModels
 {
-    class SearchResultsViewModel_Home : BaseViewModel
+    public class SearchResultsViewModel_Home : BaseViewModel
     {
         public University selectedUniversity;
         public ObservableCollection<University> Universities { get; }
         public Command GetUniversities { get; }
         public Command<University> UniversityTapped { get; set; }
 
+        INavigation navigation;
+
         public SearchResultsViewModel_Home()
         {
             Title = "Search Results";
+            INavigation Navigation = navigation;
             Universities = new ObservableCollection<University>();
             GetUniversities = new Command(async () => await GetUniversitiesFromAPI());
             UniversityTapped = new Command<University>(OnUniversitySelected);
@@ -50,28 +55,28 @@ namespace UniFindr_V2.ViewModels
             selectedUniversity = null;
         }
 
-        public async Task RefreshAPICall()
-        {
-            await GetUniversitiesFromAPI();
-        }
-
         public University SelectedUniversity
         {
             get => selectedUniversity;
             set
             {
                 SetProperty(ref selectedUniversity, value);
+                App.applicationData.LastSelectedUniversity = value;
                 OnUniversitySelected(value);
             }
         }
 
-        async void OnUniversitySelected(University university)
+        public async void OnUniversitySelected(University university)
         {
             if(university == null)
             {
                 return;
             }
-            await Shell.Current.GoToAsync("//MainMenu");
+            var result = await UniversityDetailsPage.AddToFavourites(navigation);
+            if (result)
+            {
+                await Repository_University.AddFavourite(App.applicationData.LastSelectedUniversity);
+            }
         }
     }
 }

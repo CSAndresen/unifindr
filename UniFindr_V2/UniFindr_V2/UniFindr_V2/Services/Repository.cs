@@ -43,10 +43,18 @@ namespace UniFindr_V2.Services
                 {
                     UniversityName = responseContent[i].name,
                     UniversityCountry = responseContent[i].country,
+                    UniversityArea = responseContent[i].stateprovince,
                     UniversityWebsite = responseContent[i].web_pages[0]
                 });
             }
             return FullUniversityList;
+        }
+
+        public async Task<bool> RefreshApiCall()
+        {
+            FillUniversitiesList_Home();
+            FillUniversitiesList_Abroad();
+            return await Task.FromResult(true);
         }
 
         public async Task<bool> AddFavourite(University university)
@@ -122,6 +130,25 @@ namespace UniFindr_V2.Services
                 return await Task.FromResult(true);
             }
             return await Task.FromResult(false);
+        }
+
+        public async Task<University> GetUniversity(string name, string country)
+        {
+            var client = new RestClient("http://universities.hipolabs.com/search?name=" + name + "&country=" + country)
+            {
+                Timeout = -1
+            };
+            var request = new RestRequest(Method.GET);
+            IRestResponse response = client.Execute(request);
+            List<ApiResponse> apiResponse = JsonConvert.DeserializeObject<List<ApiResponse>>(response.Content);
+            University university = new University
+            {
+                UniversityName = apiResponse[0].name,
+                UniversityCountry = apiResponse[0].country,
+                UniversityArea = apiResponse[0].stateprovince,
+                UniversityWebsite = apiResponse[0].web_pages[0]
+            };
+            return await Task.FromResult(university);
         }
     }
 }
